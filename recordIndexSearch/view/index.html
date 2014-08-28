@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    <title>RecordTemplate</title>
     <title>BensonTest</title>
     <meta charset="UTF-8">
 
@@ -17,6 +18,8 @@
     <script src="../../jquery/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../../angular/angular.min.js"></script>
     <script type="text/javascript" src="../../angular/angular-route.min.js"></script>
+    <script type="text/javascript" src="../../angular/angular.ng-modules.js"></script>
+
 
     <link href="../../kendoUI/content/shared/styles/examples-offline.css" rel="stylesheet">
     <link href="../../kendoUI/styles/kendo.common.min.css" rel="stylesheet">
@@ -24,107 +27,31 @@
     <link href="../../kendoUI/styles/kendo.default.min.css" rel="stylesheet">
     <link href="../../kendoUI/styles/kendo.dataviz.min.css" rel="stylesheet">
     <link href="../../kendoUI/styles/kendo.dataviz.default.min.css" rel="stylesheet">
+    <link href="../../kendoUI/styles/kendo.mobile.all.min.css" rel="stylesheet" />
     <script src="../../kendoUI/js/kendo.all.min.js"></script>
     <script src="../../kendoUI/content/shared/js/console.js"></script>
     <script src="../../angular/angular-kendo.js"></script>
 
+    <script type="text/javascript" src="../controllers/recorderIndex.collectionJsonAnalyser.js"></script>
+    <script type="text/javascript" src="../controllers/detailOnSearch.Directive.js"></script>
+    <script type="text/javascript" src="../controllers/filterView.Directive.js"></script>
     <script type="text/javascript" src="../controllers/searchAppController.js"></script>
-
-
+    <script type="text/javascript" src="../controllers/filterAppController.js"></script>
+    <script type="text/javascript" src="../controllers/filterEditorController.js"></script>
+    <script type="text/javascript" src="../controllers/app.js"></script>
 </head>
-<body>
+<body ng-app="appModule">
 
-
-<div ng-app="searchAppModule" ng-controller='searchAppController' ng-csp>
-
-    <div class="container-fluid ">
-            <div class=" col-sm-12 col-xs-12">
-                    <div class="row">
-                        <div class="col-sm-12 col-xs-12">
-                            <button class="col-sm-12 btn-primary">Player Location</button>
-                        </div>
-                    </div>
-
-                <div class="margin-top">
-                    <div class="form-horizontal ">
-                        <div class="form-group">
-                            <div class="col-sm-8 col-xs-8">
-                                <input type="email" class="form-control col-sm-12 col-xs-12"
-                                       type='text'
-                                       placeholder="key some word to Search"
-                                       autofocus>
-                            </div>
-
-                            <div class="col-sm-2 col-xs-2 ">
-                                <button class="col-sm-12  btn btn-primary" ng-click="cmdSearch()">Search</button>
-                            </div>
-                            <div class="col-sm-2 col-xs-2 ">
-                                <button class="col-sm-12  btn btn-warning " ng-click="cmdClearList()">ClearList</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                    <div class="form-horizontal " >
-                        <div class="form-group margin-set-bottom-3">
-                            <div class="col-sm-12 col-xs-12">
-                                <a class="col-sm-2 col-xs-2 btn btn-default" href="#/" > 自訂欄位</a>
-                                <a class="col-sm-2 col-xs-2 btn btn-default" href="#/detailElseTool" > 其他功能</a>
-                                <a class="col-sm-2 col-xs-2 btn btn-default" href="#/detailDateRange"  > 搜尋工具</a>
-                            </div>
-                            <hr style="margin-bottom: 2px">
-                        </div>
-                        <div class="form-group margin-set-bottom-0">
-                            <div class="col-sm-12">
-                                <div ng-view>
-                                <!--detail content-->
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
-                    </div>
-
-
-
-                    <div kendo-grid k-options="mainGridOptions"
-                         style="visibility:visible"
-                         k-rebind="mainGridOptions.dataSource.data"></div>
-                    <script type="text/x-kendo-template" id="template">
-                        <div kendo-tab-strip>
-                            <ul>
-                                <li>Contact information</li>
-                            </ul>
-                            <div>
-                                <ul>
-                                    <li>href: <input ng-model="dataItem.href"/></li>
-                                    <li>
-                                        data:
-                                        <ul ng-repeat="data in dataItem.data">
-                                            <li>Name: <input ng-model="data.name"/></li>
-                                            <li>prompt: <input ng-model="data.prompt"/></li>
-                                            <li>value: <input ng-model="data.value"/></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        link:
-                                        <ul ng-repeat="link in dataItem.links">
-                                            <li>href: <input ng-model="link.href"/></li>
-                                            <li>rel: <input ng-model="link.rel"/></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </script>
-                    <script type="text/x-kendo-template" id="hrefColumntemplate">
-                        <button kendo-button class="k-primary" k-on-click="onClick2(dataItem)">{{dataItem.href}}</button>
-                    </script>
-
-             </div>
-
-
-        </div>
+<div  ng-controller="appController"  class="container-fluid">
+    <div class=" col-sm-2 col-xs-2">
+        <ul>
+            <li><a href="#/">錄音查詢</a></li>
+            <li><a href="#/filter">篩選器</a></li>
+        </ul>
+    </div>
+    <div class=" col-sm-10 col-xs-10" ng-view >
     </div>
 </div>
+
 </body>
 </html>

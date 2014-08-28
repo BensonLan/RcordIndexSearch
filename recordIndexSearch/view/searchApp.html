@@ -1,0 +1,71 @@
+
+<div ng-app="searchAppModule" >
+    <div ng-controller='searchAppController' class="container-fluid ">
+            <div class=" col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <button class="col-sm-12 btn-primary">Player Location</button>
+                        </div>
+                    </div>
+                <div class="margin-top">
+                    <div class="form-horizontal ">
+                        <div class="form-group">
+                            <div class="col-sm-8 col-xs-8">
+                                <input  class="form-control col-sm-12 col-xs-12"
+                                       type='text'
+                                       placeholder="key some word to Search"
+                                       autofocus>
+                            </div>
+
+                            <div class="col-sm-2 col-xs-2 ">
+                                <button class="col-sm-12  btn btn-primary" ng-click="cmdSearch()">Search</button>
+                            </div>
+                            <div class="col-sm-2 col-xs-2 ">
+                                <button class="col-sm-12  btn btn-warning " ng-click="cmdClearList()"></span>ClearList</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="margin-set-Top--20 margin-set-bottom-5">
+                     <DETAIL-on-search></DETAIL-on-search>
+                 </div>
+
+                    <div kendo-grid k-options="mainGridOptions"
+                         style="visibility:visible"
+                         k-rebind="selectType"></div>
+                    <script type="text/x-kendo-template" id="template">
+                        <div kendo-tab-strip>
+                            <ul>
+                                <li>Contact information</li>
+                            </ul>
+                            <div>
+                                <ul>
+                                    <li>href: <input ng-model="dataItem.href"/></li>
+                                    <li>
+                                        data:
+                                        <ul ng-repeat="data in dataItem.data">
+                                            <li>Name: <input ng-model="data.name"/></li>
+                                            <li>prompt: <input ng-model="data.prompt"/></li>
+                                            <li>value: <input ng-model="data.value"/></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        link:
+                                        <ul ng-repeat="link in dataItem.links">
+                                            <li>href: <input ng-model="link.href"/></li>
+                                            <li>rel: <input ng-model="link.rel"/></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </script>
+                    <script type="text/x-kendo-template" id="hrefColumntemplate">
+                        <button kendo-button class="k-primary" k-on-click="onClick2(dataItem)">{{dataItem.href}}</button>
+                    </script>
+             </div>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="list-group" >
+    <label class="list-group-item active">
+        FilterList
+    </label>
+    <a ng-repeat="data in datasource " class="list-group-item"
+       href="#/filterEditor/{{encodeURIComponent(stringify(data))}}">{{data.value}}</a>
+</div>

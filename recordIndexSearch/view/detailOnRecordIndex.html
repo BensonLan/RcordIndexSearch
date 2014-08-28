@@ -1,0 +1,26 @@
+<div > 
+    <ul class="nav nav-pills" >
+        <!--active:panel.tab===1 的意思是 若 panel.tab===1 時 激活(顯示) -->
+        <li ng-class={active:detailOnRecordIndexController.tabIndex===1}>
+            <a href ng-click="detailOnRecordIndexController.selectTab(1)">搜尋資訊</a>
+        </li>
+        <li ng-class="{active:detailOnRecordIndexController.tabIndex===2}">
+            <a href ng-click="detailOnRecordIndexController.selectTab(2)">其他功能</a>
+        </li>
+        <li ng-class="{active:detailOnRecordIndexController.tabIndex===3}">
+            <a href ng-click="detailOnRecordIndexController.selectTab(3)">搜尋工具</a>
+        </li>
+    </ul>
+    <hr style="margin-bottom: 3px; margin-top: 3px">
+    <div class="container">
+        <div  ng-show="detailOnRecordIndexController.isSelected(1)">
+            <detail-data-count></detail-data-count>
+        </div>
+        <div  ng-show="detailOnRecordIndexController.isSelected(2)">
+            <detail-else-tool></detail-else-tool>
+        </div>
+        <div  ng-show="detailOnRecordIndexController.isSelected(3)">
+            <detail-search-condition></detail-search-condition>
+        </div>
+    </div>
+</div>

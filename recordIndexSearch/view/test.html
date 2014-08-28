@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <script src="../../jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../../angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../angular/angular-route.min.js"></script>
+    <script type="text/javascript" src="../../angular/angular.ng-modules.js"></script>
+    <script>
+        var moduleA = angular.module("MyModuleA", []);
+
+        moduleA.filter('canDrink', function()
+        {
+            return function(data,minage)
+            {
+                var results=[];
+                if(!minage) minage=29;
+
+                if(!data)data=results
+
+                for(count in data)
+                {
+                    var temp=data[count];
+                    if(temp.age>minage)results.push(temp)
+                }
+
+                return results;
+            }
+        });
+
+        moduleA.controller("MyControllerA", function($scope) {
+
+            $scope.$watch('minAgeRang',function(newValue,oldValue)
+            {
+                var x=newValue;
+            })
+            $scope.users=[{name:"Benson",age:29},{name:"Mary",age:28},{name:"Henry",age:30}]
+
+
+        });
+
+
+    </script>
+</head>
+<body >
+<div ng-app="MyModuleA">
+
+    <div ng-controller="MyControllerA">
+        <input type="number" ng-model="minAgeRang" >
+        <ul ng-repeat="user in users | canDrink:minAgeRang ">
+            <li >{{user}}</li>
+        </ul>
+    </div>
+
+</div>
+
+
+</body>
+</html>

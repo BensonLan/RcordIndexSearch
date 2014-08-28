@@ -1,0 +1,45 @@
+<div class="form-horizontal">
+    <div class="form-group ">
+        <div>
+
+        </div>
+
+        <select kendo-drop-down-list
+                k-options="filtersOptions"
+                >
+        </select>
+
+        <select kendo-drop-down-list
+                k-options="resultTemplateOptions"
+                ng-model="selectedItemFormResultTemplate"
+                ng-change="resultTemplateChange()"
+                >
+        </select>
+
+        <select kendo-drop-down-list
+                k-options="dateRangeOptions"
+                ng-model="selectedItemdateRange"
+                ng-change="dateRangeChange()"
+                >
+        </select>
+
+        <div id="modalview-login" kendo-mobile-modal-view="modal" style="width: 50%;background-color: #ffffff">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span>自訂義時間範圍</span>
+                </div>
+            </div>
+            <ul>
+                <li><label >開始時間: </label><input type="text"  /></li>
+                <li><label >結束時間: </label><input type="text" /></li>
+<!--                <li><label for="username">Username: </label><input type="text" id="username" /></li>
+                     <li><label for="password">Password: </label><input type="password" id="password" /></li>-->
+            </ul>
+            <a ng-click="modal.close()" id="modalview-login-button" type="button">確定</a>
+            <a ng-click="modal.close()" id="modalview-reg-button" type="button">取消</a>
+        </div>
+
+
+    </div>
+
+</div>
