@@ -2,7 +2,8 @@
  * Created by YINGCHIEH on 8/13/2014.
  */
 
-domainIP = "http://rd1-andy-08r2:9000"
+//domainIP = "http://rd1-andy-08r2:9000"
+domainIP = "http://192.168.2.27:9000"
 
 var appConstructor = function () {
 

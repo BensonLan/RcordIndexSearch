@@ -62,26 +62,157 @@ var filterViewDirectiveConstructor = function () {
         ]}
     ]}}
 
-    var app = angular.module('filterView.directive', []);
+    var app = angular.module('filterView.directive', ['log8k.collectionJsonAnalyer']);
 
 
     //Directive
-    app.directive('filterList', function () {
+    app.directive('filterList', function (collectionJsonAnalyer) {
         return {
             restrict: 'E',
             scope: {
-                datasource: '='
+                datasource: '=',
+                functionTemplate:'=',
+                selectedChange:'=',
+                reflashAction: '=',
+                addItemAction:'='
             },
-            controller: function ($scope) {
+            link: function (scope, element, attrs) {
                 //json 變成 string
-                $scope.stringify = JSON.stringify;
+                scope.stringify = JSON.stringify;
 
                 //加密成html格式
-                $scope.encodeURIComponent = encodeURIComponent;
+                scope.encodeURIComponent = encodeURIComponent;
+
+                scope.reflash = function () {
+                    scope.reflashAction(scope.datasource)
+                };
+
+                scope.addItem= function () {
+                    scope.addItemAction();
+                };
+
+                scope.currentItemChange=function(selectedItem)
+                {
+                    scope.selectedChange(selectedItem);
+                }
+
+
+                scope.$watch("functionTemplate",function(newValue) {
+                    if(newValue)
+                    {
+                        collectionJsonAnalyer.isCreatorTemplate(collectionJsonAnalyer.LinkConvertLinkClass(newValue),function(isCreator)
+                        {
+                            scope.isCreatorTemplate=isCreator;
+                        });
+                    }
+                });
             },
             templateUrl: '/RcordIndexSearch/recordIndexSearch/view/filterList.html'
         };
     });
+
+
+    app.directive('filterEditorModal', function (collectionJsonAnalyer) {
+        return {
+            restrict: 'E',
+            scope: {
+                open: '=',
+                inputCollection:'=',
+                functionTemplate:'=',
+                validateAction:'=',
+                addAction:'=',
+                updateAction:'=',
+                deleteAction:'=',
+                closeAction:'='
+            },
+            link: function (scope, element, attrs) {
+
+                var fountionTemplate={};
+                scope.$watch("open",function(newValue) {
+                    if(newValue)
+                    {
+                        scope.modal.open();
+                    }
+                });
+                scope.isConditionError=false;
+                scope.$watch("functionTemplate",function(newValue) {
+                    if(newValue)
+                    {
+                        fountionTemplate=collectionJsonAnalyer.LinkConvertLinkClass(newValue);
+                        collectionJsonAnalyer.isCreatorTemplate(fountionTemplate,function(isShow)
+                        {
+                            scope.isCreatorTemplate=isShow;
+                        });
+                        collectionJsonAnalyer.isEditTemplate(fountionTemplate,function(isShow)
+                        {
+                            scope.isEditTemplate=isShow;
+                        });
+                        collectionJsonAnalyer.isValidatorTemplate(fountionTemplate,function(isShow)
+                        {
+                            scope.isValidatorTemplate=isShow;
+                        });
+
+                    }
+                });
+
+
+                scope.cmdBtnValidate=function()
+                {
+                    if( scope.addAction)
+                    {
+                        scope.validateAction(scope.inputCollection);
+                    }
+                    scope.open=false;
+                    scope.modal.close();
+                };
+                scope.cmdBtnAdd=function()
+                {
+                    if( scope.addAction)
+                    {
+                        scope.addAction(scope.inputCollection,collectionJsonAnalyer.getCreatorLinkFromLinkClass(fountionTemplate));
+                    }
+                    scope.open=false;
+                    scope.modal.close();
+
+                };
+                scope.cmdBtnUpdate=function()
+                {
+                    if( scope.updateAction)
+                    {
+                        scope.updateAction(scope.inputCollection,fountionTemplate);
+                    }
+                    scope.open=false;
+                    scope.modal.close();
+                };
+                scope.cmdBtnDelete=function()
+                {
+                    if (scope.deleteAction)
+                    {
+                        scope.deleteAction(scope.inputCollection,fountionTemplate);
+                    }
+                    scope.open=false;
+                    scope.modal.close();
+                };
+                scope.cmdBtnClose=function()
+                {
+                    if (scope.closeAction)
+                    {
+                        scope.closeAction(scope.inputCollection);
+                    }
+                    scope.open=false;
+                    scope.modal.close();
+
+                };
+
+                scope.getObjectMappingNameToValueFromDatas=collectionJsonAnalyer.getObjectMappingNameToValueFromDatas;
+
+
+
+            },
+            templateUrl: '/RcordIndexSearch/recordIndexSearch/view/filterEditorModal.html'
+        };
+    });
+
 }();
 
 

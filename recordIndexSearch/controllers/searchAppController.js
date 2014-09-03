@@ -119,7 +119,7 @@ var searchAppControllerAppConstructor = function () {
         $scope.cmdSearch = function () {
             var url = $scope.query;
             searchAppFactory.getFakeData().then(function (jsonCollection) {
-                $scope.mainGridOptions.dataSource.data = getDatasFromItems(jsonCollection);
+                $scope.mainGridOptions.dataSource.data = getDatasFromCollectionJson(jsonCollection);
                 $scope.dataCount = $scope.mainGridOptions.dataSource.data.length;
                 $scope.notifySearchGrid();
             });

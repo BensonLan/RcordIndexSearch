@@ -1,0 +1,43 @@
+<div name="a" id="modalview-login" kendo-mobile-modal-view="modal" style="width: 50%;;background-color: #ffffff">
+    <div data-role="header">
+        <div data-role="navbar">
+            <span>Filter Editor</span>
+        </div>
+    </div>
+        <ul name="b"  >
+            <li ame="c1">
+                <label>名稱</label>
+                <input name="inputNameText" type="text" class="form-control" placeholder="請輸入名稱..."
+                       ng-model="getObjectMappingNameToValueFromDatas('title',inputCollection).value">
+            </li>
+            <li name="c2" >
+                <label>條件</label>
+                <input name="inputConditionText" type="text" class="form-control" placeholder="請輸入條件..."
+                       ng-model="getObjectMappingNameToValueFromDatas('condition',inputCollection).value">
+            </li>
+            <li>
+                <button  ng-click="cmdBtnValidate()"
+                         ng-show="isValidatorTemplate"
+                         ng-disabled="getObjectMappingNameToValueFromDatas('condition',inputCollection).value===''"
+                         class="btn btn-default">Validate</button>
+
+
+                <button  ng-click="cmdBtnAdd()"
+                          ng-show="isCreatorTemplate"
+                          ng-disabled="getObjectMappingNameToValueFromDatas('title',inputCollection).value===''||getObjectMappingNameToValueFromDatas('condition',inputCollection).value===''"
+                          class="btn btn-default">Add</button>
+                <button  ng-click="cmdBtnUpdate()"
+                         ng-show="isEditTemplate"
+                         ng-disabled="getObjectMappingNameToValueFromDatas('title',inputCollection).value===''||getObjectMappingNameToValueFromDatas('condition',inputCollection).value===''"
+                          class="btn btn-default">Update</button>
+                <button  ng-click="cmdBtnDelete()" class="btn btn-default">Delete</button>
+                <button  ng-click="cmdBtnClose()" class="btn btn-default">Close</button>
+            </li>
+
+            <li> &nbsp;</li>
+
+        </ul>
+
+
+
+</div>

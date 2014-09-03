@@ -1,7 +1,23 @@
 <div class="list-group" >
-    <label class="list-group-item active">
-        FilterList
-    </label>
-    <a ng-repeat="data in datasource " class="list-group-item"
-       href="#/filterEditor/{{encodeURIComponent(stringify(data))}}">{{data.value}}</a>
+    <div class="list-group-item active" >
+        <div style="display:inline">
+        <label >
+            FilterList
+        </label>
+        </div>
+        <div class="pull-right" >
+        <button class="btn btn-primary  " ng-click="addItem()"  ng-show="isCreatorTemplate" ><span class="glyphicon glyphicon-plus" /></button>
+        <button class="btn btn-primary  " ng-click="reflash()"  ><span class="glyphicon glyphicon-refresh" /></button>
+        </div>
+    </div>
+
+    <li ng-repeat="data in datasource "
+       class="list-group-item"
+       ng-click="currentItemChange(data)"
+       >{{data.value}}</li>
+
+<!--    <a ng-repeat="data in datasource "
+       class="list-group-item"
+
+       href="#/filterEditor/{{encodeURIComponent(stringify(data))}}">{{data.value}}</a>-->
 </div>

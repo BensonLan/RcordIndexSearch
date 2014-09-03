@@ -1,8 +1,42 @@
-
 <body ng-app="searchAppModule" ng-controller="filterController">
-<div  class="container">
-    <filter-list datasource="datas"></filter-list>
-    <button  ng-click="cmdSearch()" class="btn btn-primary">取得資料</button>
-    <!--<p>{{showCollectionJsonString}}</p>-->
+<div class="form-horizontal ">
+    <div class="form-group">
+        <div class="col-sm-10 col-xs-10">
+            <input  class="form-control col-sm-12 col-xs-12"
+                    type='text'
+                    placeholder="key some words to Search"
+                    ng-model="searchWording"
+                    autofocus>
+        </div>
+        <div class="col-sm-2 col-xs-2">
+            <button class="col-sm-12 col-xs-12  btn btn-primary" ng-click="cmdSearch(searchWording)">Search</button>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <filter-list
+            datasource="datas"
+            function-template="functionTemplate"
+            reflash-action="reGetFilters"
+            add-item-action="addItem"
+            selected-change="selectFilterItemChange"
+            ></filter-list>
+
+    <filter-editor-modal
+            open="openModal"
+            input-collection="inputCollection"
+            function-template="functionTemplateForModal"
+            validate-action="filterValidateAction"
+            add-action="filterAddAction"
+            update-action="filterUpdateAction"
+            delete-action="filterDeleteAction"
+            tilte="filter editor"
+            >
+        //wpf= contenttemplate
+        //angular= transclude
+    </filter-editor-modal>
+</div>
 </div>
 </body>
